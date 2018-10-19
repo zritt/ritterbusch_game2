@@ -71,8 +71,9 @@ def print_inventory_items(items):
     <BLANKLINE>
 
     """
-    print("You have " + list_of_items(items) + ".")
-    print()
+    if len(items) > 0:
+        print("You have " + list_of_items(items) + ".")
+        print()
 
 
 def print_room(room):
@@ -255,9 +256,13 @@ def execute_take(item_id):
     global current_room
     global inventory
     global items
-
-    if items[item_id] in current_room["items"]:
-
+    is_present = False
+    for elem in current_room["items"]:
+        if elem["id"] == item_id:
+            is_present = True
+            break
+    #if items[item_id] in current_room["items"]:
+    if is_present:
         total_mass = 0
 
         for elem in inventory:
@@ -285,8 +290,13 @@ def execute_drop(item_id):
     global current_room
     global items
     global inventory
-    
-    if items[item_id] in inventory:
+    is_present = False
+    for elem in inventory:
+        if elem["id"] == item_id:
+            is_present = True
+            break
+    #if items[item_id] in inventory:
+    if is_present:
         current_room["items"].append(items[item_id])
         i = 0
         for elem in inventory:

@@ -105,7 +105,7 @@ def normalise_input(user_input):
             word = word + char
             if count == len(no_punct):
                 words.append(word)
-        elif len(word) > 1:
+        elif len(word) > 0:
             words.append(word)
             word = ""
         count += 1
